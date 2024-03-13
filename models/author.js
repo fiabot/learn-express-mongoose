@@ -27,6 +27,19 @@ AuthorSchema
   return fullname;
 });
 
+
+AuthorSchema
+.virtual('lifespan')
+.get(function () {
+  let byear = this.date_of_birth.getFullYear().toString(); 
+  if (this.date_of_death){
+    let dyear = this.date_of_death.getFullYear().toString(); 
+    return byear + "-" + dyear; 
+  }else{
+    return byear + "-"; 
+  }
+});
+
 // Virtual for author's lifespan
 AuthorSchema.virtual('lifespan').get(function() {});
 
