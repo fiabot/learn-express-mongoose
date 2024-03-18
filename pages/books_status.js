@@ -1,11 +1,13 @@
 let BookInstance = require('../models/bookinstance');
 let Book = require('../models/book');
+let BookInstance = require("../models/")
 let Author = require('../models/author');
 
 function get_books () {
-  return Book.find({status: "available"}, 'title author')
+  return BookInstance.find({status: {$eq: "available"}}, 'title author')
     .sort({title : 1})  // 1 indictes ascending order
-    .populate('author');
+    .populate('book')
+    .populate("author");
 }
 
 async function get_avail_books (){
